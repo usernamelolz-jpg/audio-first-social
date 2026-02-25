@@ -1,23 +1,31 @@
-import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Audio } from 'expo-av';
-import AppNavigator from './src/navigation/AppNavigator';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  useEffect(() => {
-    // Configure audio mode on app start
-    Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      playsInSilentModeIOS: true,
-      staysActiveInBackground: false,
-      shouldDuckAndroid: true,
-    });
-  }, []);
-
   return (
-    <>
+    <View style={styles.container}>
+      <Text style={styles.text}>🎙️ Audio First Social Media</Text>
+      <Text style={styles.subtext}>If you see this, Expo is working!</Text>
       <StatusBar style="auto" />
-      <AppNavigator />
-    </>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  subtext: {
+    fontSize: 16,
+    color: '#666',
+  },
+});
