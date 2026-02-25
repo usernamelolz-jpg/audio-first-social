@@ -20,10 +20,16 @@ export default function RecordScreen({ navigation }: Props) {
 
   async function startRecording() {
     try {
-      await Audio.requestPermissionsAsync();
+      const permission = await Audio.requestPermissionsAsync();
+      if (!permission.granted) {
+        Alert.alert('Permission needed', 'Please allow microphone access');
+        return;
+      }
+      
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
+        staysActiveInBackground: false,
       });
 
       const { recording } = await Audio.Recording.createAsync(
